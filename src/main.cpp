@@ -94,19 +94,20 @@ void opcontrol() {
 		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
 		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
 		
-		chassis.tank(master.getAnalog(ControllerAnalog::leftY), master.getAnalog(ControllerAnalog::rightY), 0);
+		chassis.arcade(master.getAnalog(ControllerAnalog::leftY), master.getAnalog(ControllerAnalog::rightY), 0);
 
 		if(master.getDigital(ControllerDigital::R1))
-			Lift.moveVelocity(60);
+			Lift.moveVoltage(12000/2);
 		else if(master.getDigital(ControllerDigital::R2))
-			Lift.moveVelocity(-60);
+			Lift.moveVoltage(-12000/2);
 		else
 			Lift.moveVelocity(0);
 
 		if(master.getDigital(ControllerDigital::up))
-			Flag.moveVelocity(60);
+		//This moves it up, don't question it...
+			Flag.moveVoltage(-12000/2);
 		else if(master.getDigital(ControllerDigital::down))
-			Flag.moveVelocity(-60);
+			Flag.moveVoltage(12000/2);
 		else
 			Flag.moveVelocity(0);
 
